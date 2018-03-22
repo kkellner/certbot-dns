@@ -10,7 +10,7 @@ cert_name="lab.mycompany.com"
 domain_subject_cn="*.lab.mycompany.com"
 domain_sans="*.system.lab.mycompany.com, *.apps.lab.mycompany.com, *.uaa.system.lab.mycompany.com, *.login.system.lab.mycompany.com"
 
-# Use acme-staging-v02 for testing and acme-v02 for real production
+# Use acme-staging-v02 for testing and acme-v02 for real production cert
 letsencrypt_api_endpoint=https://acme-staging-v02.api.letsencrypt.org/directory
 #letsencrypt_api_endpoint=https://acme-v02.api.letsencrypt.org/directory
 
