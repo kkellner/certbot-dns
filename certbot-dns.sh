@@ -6,6 +6,9 @@
 # This script will call a helper DNS script
 # to perform the DNS updates. 
 #
+# Prerequisites:
+#   certbot cli - https://certbot.eff.org/docs/install.html
+#
 # Copyright (C) 2018 Kurt Kellner - All Rights Reserved
 # Licensed under the Apache License, Version 2.0 (the "License");
 #

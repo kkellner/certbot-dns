@@ -5,6 +5,23 @@
 # AWS route53 update.  This is because it takes 60 seconds or so to perform
 # a synced update with route53 as it roles out to all aws datacenters.
 #
+# NOTE: You must have the `aws` CLI installed and configured
+#  Install:
+#  https://docs.aws.amazon.com/cli/latest/userguide/installing.html
+#  e.g.,  MacOS: brew install awscli
+#         Other: pip install awscli
+#  Configure:
+#  https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
+#  e.g.,
+#    $ aws configure
+#    AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+#    AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+#    Default region name [None]: us-west-2
+#    Default output format [None]: json
+#
+# Copyright (C) 2018 Kurt Kellner - All Rights Reserved
+# Licensed under the Apache License, Version 2.0 (the "License");
+#
 [[ ${CERTBOT_AUTH_OUTPUT} ]] && ACTION="DELETE" || ACTION="UPSERT"
 
 DOMAIN="${CERTBOT_DOMAIN}"
