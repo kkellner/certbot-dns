@@ -11,11 +11,12 @@ This solution was inspired by https://github.com/jed/certbot-route53 but enhance
 
 # How to use
 
-Copy file [example_gen_certs.sh](example_gen_certs.sh) to another file as a template / starting point to generate your cert.
+Clone repo then copy file [example_gen_certs.sh](example_gen_certs.sh) to another file as a template / starting point to generate your cert.  
 
 ```
-cp example_gen_certs.sh myserver_gen_certs.sh
-vi myserver_gen_certs.sh
+$ git clone https://github.com/kkellner/certbot-dns.git
+$ cp example_gen_certs.sh myserver_gen_certs.sh
+$ vi myserver_gen_certs.sh
 ```
 
 Update the `myserver_gen_certs.sh` file with the names of the DNS entries that should be in the cert.
