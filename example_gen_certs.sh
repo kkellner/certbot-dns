@@ -16,7 +16,7 @@ export CERT_OUTPUT_DIR=${PWD}/letsencrypt
 ./certbot-dns.sh \
    --agree-tos \
    --manual-public-ip-logging-ok \
-   --email kurt.kellner@gmail.com \
+   --email my-email@mycompany.com \
    --server https://acme-staging-v02.api.letsencrypt.org/directory \
    --cert-name "${cert_name}" \
    --domains "${domain_subject_cn}" \
