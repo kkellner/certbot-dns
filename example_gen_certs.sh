@@ -10,6 +10,10 @@ cert_name="lab.mycompany.com"
 domain_subject_cn="*.lab.mycompany.com"
 domain_sans="*.system.lab.mycompany.com, *.apps.lab.mycompany.com, *.uaa.system.lab.mycompany.com, *.login.system.lab.mycompany.com"
 
+# Use acme-staging-v02 for testing and acme-v02 for real production
+letsencrypt_api_endpoint=https://acme-staging-v02.api.letsencrypt.org/directory
+#letsencrypt_api_endpoint=https://acme-v02.api.letsencrypt.org/directory
+
 export DNS_TYPE=aws
 export CERT_OUTPUT_DIR=${PWD}/letsencrypt
 
