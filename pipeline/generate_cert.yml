@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: certbot/dns-route53}
+
+inputs:
+- name: certbot-dns-repo
+
+params:
+  EMAIL_ADDRESS:
+  DOMAINS:
+
+run:
+  path: certbot-dns-repo/pipeline/generate_cert.sh
