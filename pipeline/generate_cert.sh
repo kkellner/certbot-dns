@@ -2,6 +2,8 @@
 
 set -eux
 
+env
+
 certbot certonly \
      --non-interactive \
      --agree-tos \
