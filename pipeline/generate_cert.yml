@@ -9,6 +9,7 @@ image_resource:
  
 inputs:
 - name: certbot-dns-repo
+- name: cert-repo
 #outputs:
 #- name: cert-repo
 
