@@ -1,6 +1,6 @@
 #!/bin/sh
 
-certbot/dns-route53 certonly \
+certbot certonly \
      --non-interactive \
      --agree-tos \
      --manual-public-ip-logging-ok \
