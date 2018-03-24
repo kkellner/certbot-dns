@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eux
+
 certbot certonly \
      --non-interactive \
      --agree-tos \
