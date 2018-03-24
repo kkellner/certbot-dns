@@ -17,9 +17,13 @@ CERT_OUTPUT_DIR=letsencrypt
 #      --email "${EMAIL_ADDRESS}" \
 #      --domains "${DOMAINS}"
 
+# temp to get some changed files
 mkdir -p ./letsencrypt/live/den.ecsteam.io
+date >> ./letsencrypt/live/den.ecsteam.io/fullchain.pem
+date >> ./letsencrypt/live/den.ecsteam.io/privkey.pem
 
-mkdir -p cert-repo/proxy-certs
+
+mkdir cert-repo/proxy-certs
 
 cp ./letsencrypt/live/den.ecsteam.io/fullchain.pem cert-repo/proxy-certs
 cp ./letsencrypt/live/den.ecsteam.io/privkey.pem cert-repo/proxy-certs
