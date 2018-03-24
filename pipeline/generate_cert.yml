@@ -4,10 +4,14 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: certbot/dns-route53
+    repository: cgicloudnative/concourse-alpine
+      #certbot/dns-route53
  
 inputs:
 - name: certbot-dns-repo
+outputs:
+- name: certbot-repo
+
 
 params:
   AWS_ACCESS_KEY_ID:
