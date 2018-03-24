@@ -4,6 +4,8 @@ set -eux
 
 env
 
+exit 1
+
 certbot certonly \
      --non-interactive \
      --agree-tos \
