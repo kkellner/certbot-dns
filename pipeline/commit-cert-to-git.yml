@@ -1,0 +1,19 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: cgicloudnative/concourse-alpine
+ 
+inputs:
+- name: certbot-dns-repo
+- name: cert-repo
+- name: letsencrypt
+outputs:
+- name: cert-repo-modified
+
+params:
+
+run:
+  path: certbot-dns-repo/pipeline/commit-cert-to-git.sh
