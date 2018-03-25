@@ -12,8 +12,8 @@ cp -R ${CERT_OUTPUT_DIR}/live/* cert-repo-modified/proxy-certs
 
 cd cert-repo-modified
 
-git config --global user.email "${email_address}"
-git config --global user.name "${email_address}"
+git config --global user.email "${EMAIL_ADDRESS}"
+git config --global user.name "${EMAIL_ADDRESS}"
 
 git add .
 git commit -m "add new lab proxy cert file from LetsEncrypt"
