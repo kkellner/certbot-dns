@@ -5,20 +5,14 @@ image_resource:
   type: docker-image
   source:
     repository: cgicloudnative/concourse-alpine
-      #certbot/dns-route53
  
 inputs:
-- name: certbot-dns-repo
 - name: cert-repo
-outputs:
 - name: letsencrypt
-
+outputs:
+- name: cert-repo-modified
 
 params:
-  AWS_ACCESS_KEY_ID:
-  AWS_SECRET_ACCESS_KEY:
-  EMAIL_ADDRESS:
-  DOMAINS:
 
 run:
   path: certbot-dns-repo/pipeline/generate_cert.sh
