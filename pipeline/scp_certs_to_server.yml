@@ -1,0 +1,14 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: cgicloudnative/concourse-alpine
+ 
+inputs:
+- name: certbot-dns-repo
+- name: cert-repo
+
+run:
+  path: certbot-dns-repo/pipeline/scp_certs_to_server.sh
