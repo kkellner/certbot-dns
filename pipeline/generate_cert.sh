@@ -5,9 +5,10 @@ set -eux
 CERT_OUTPUT_DIR=letsencrypt
 CERT_WORK_DIR=letsencrypt_work
 
-cp -R cert-repo/${CERT_OUTPUT_DIR} .
-
-ls -alR ${CERT_OUTPUT_DIR}
+if [ -d cert-repo/${CERT_OUTPUT_DIR} ]; then
+    cp -R cert-repo/${CERT_OUTPUT_DIR} .
+    ls -alR ${CERT_OUTPUT_DIR}
+fi 
 
 echo "XXXXXXXXXXXXXXXXXXXXX"
 
