@@ -17,4 +17,4 @@ params:
   EMAIL_ADDRESS:
 
 run:
-  path: certbot-dns-repo/pipeline/commit-cert-to-git.sh
+  path: certbot-dns-repo/pipeline/tasks/commit-cert-to-git.sh

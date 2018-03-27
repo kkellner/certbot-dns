@@ -21,4 +21,4 @@ params:
   DOMAINS:
 
 run:
-  path: certbot-dns-repo/pipeline/generate_cert.sh
+  path: certbot-dns-repo/pipeline/tasks/generate_cert.sh

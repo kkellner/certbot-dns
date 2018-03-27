@@ -11,4 +11,4 @@ inputs:
 - name: cert-repo
 
 run:
-  path: certbot-dns-repo/pipeline/scp_certs_to_server.sh
+  path: certbot-dns-repo/pipeline/tasks/scp_certs_to_server.sh

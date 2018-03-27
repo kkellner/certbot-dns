@@ -1,42 +1,74 @@
 ---
+resource_types:
+- name: concourse-ssh-scp-resource
+  type: docker-image
+  source:
+    repository: danrspencer/concourse-ssh-scp-resource
+
 resources:
-- name: resource-tutorial
+- name: certbot-dns-repo
   type: git
   source:
     uri: https://github.com/kkellner/certbot-dns.git
     branch: master 
 
+- name: cert-repo
+  type: git
+  source:
+    uri: {{cert_git_repo}}
+    private_key: {{cert_git_repo_private_key}}
+    branch: {{cert_git_repo_branch}}
+
+- name: cert-target-server
+  type: concourse-ssh-scp-resource
+  source:
+    host: {{target_host}}
+    user: {{target_user}}
+    private_key: {{target_private_key}}
+
 jobs:
-- name: job-pass-files
+- name: generate-cert
   public: true
   plan:
-  - get: resource-tutorial
-  - task: create-some-files
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source: {repository: busybox}
-
-      inputs:
-      - name: resource-tutorial
-      outputs:
-      - name: some-files
-
-      run:
-        path: resource-tutorial/pipeline/create_some_files.sh
-
-  - task: show-some-files
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source: {repository: busybox}
-
-      inputs:
-      - name: resource-tutorial
-      - name: some-files
-
-      run:
-        path: resource-tutorial/pipeline/show_files.sh
-
+  - aggregate:
+    - get: certbot-dns-repo
+    - get: cert-repo
+  - task: generate-cert
+    file: certbot-dns-repo/pipeline/tasks/generate_cert.yml
+    params:
+      LETSENCRYPT_API_ENDPOINT: ((letsencrypt_api_endpoint))
+      AWS_ACCESS_KEY_ID: ((aws_access_key_id))
+      AWS_SECRET_ACCESS_KEY: ((aws_secret_access_key))
+      EMAIL_ADDRESS: ((email_address))
+      DOMAINS: ((domains))
+  - task: commit-cert-to-git
+    file: certbot-dns-repo/pipeline/tasks/commit-cert-to-git.yml
+    params:
+      EMAIL_ADDRESS: ((email_address))
+  - put: cert-repo
+    params:
+      repository: cert-repo-modified
+      
+- name: update-target-server
+  plan:
+  - aggregate:
+    - get: certbot-dns-repo
+    - get: cert-repo 
+      passed: [generate-cert]
+      trigger: true
+  - task: update-target-server
+    file: certbot-dns-repo/pipeline/tasks/scp_certs_to_server.yml
+  - put: cert-target-server
+    params:
+      files: 
+        cert-repo/letsencrypt/live/{{base_subject}}/fullchain.pem: "/etc/nginx/ssl/{{base_subject}}/fullchain.pem"
+        cert-repo/letsencrypt/live/{{base_subject}}/privkey.pem: "/etc/nginx/ssl/{{base_subject}}/privkey.pem"
+      commands: [
+        "echo \"**** Cert on disk:\"",
+        "openssl x509 -in /etc/nginx/ssl/{{base_subject}}/fullchain.pem -text -noout",
+        "service nginx reload",
+        "echo \"**** Cert in use by nginx:\"",
+        "echo | openssl s_client -connect x.{{base_subject}}:443 2> /dev/null | openssl x509 -noout -issuer -subject -text",
+        "echo \"**** Cert in use by nginx experation date:\"",
+        "echo | openssl s_client -connect x.{{base_subject}}:443 2> /dev/null | openssl x509 -noout -dates"
+      ]
