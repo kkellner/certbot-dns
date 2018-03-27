@@ -12,8 +12,13 @@ cp -R ${CERT_OUTPUT_DIR} cert-repo-modified
 
 cd cert-repo-modified
 
-git config --global user.email "${EMAIL_ADDRESS}"
-git config --global user.name "${EMAIL_ADDRESS}"
+if [[ -z $(git status -s) ]]; then 
+  git config --global user.email "${EMAIL_ADDRESS}"
+  git config --global user.name "${EMAIL_ADDRESS}"
 
-git add .
-git commit -m "add new lab proxy cert file from LetsEncrypt"
+  git add .
+  git commit -m "add new lab proxy cert file from LetsEncrypt"
+
+else
+  echo "Nothing to commit -- certs must not have been updated"
+fi

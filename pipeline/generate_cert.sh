@@ -10,8 +10,6 @@ if [ -d cert-repo/${CERT_OUTPUT_DIR} ]; then
     ls -alR ${CERT_OUTPUT_DIR}
 fi 
 
-echo "XXXXXXXXXXXXXXXXXXXXX"
-
 certbot certonly \
      --config-dir "${CERT_OUTPUT_DIR}" \
      --work-dir "${CERT_WORK_DIR}" \
