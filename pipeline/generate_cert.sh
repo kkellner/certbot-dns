@@ -4,6 +4,10 @@ set -eux
 
 CERT_OUTPUT_DIR=letsencrypt
 
+mkdir -p ${CERT_OUTPUT_DIR}/live
+cp -R cert-repo/proxy-certs/* ${CERT_OUTPUT_DIR}/live
+
+
 certbot certonly \
      --config-dir "${CERT_OUTPUT_DIR}" \
      --work-dir "${CERT_OUTPUT_DIR}" \
