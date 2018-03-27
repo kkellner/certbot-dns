@@ -12,7 +12,7 @@ cp -R ${CERT_OUTPUT_DIR} cert-repo-modified
 
 cd cert-repo-modified
 
-if [[ -z $(git status -s) ]]; then 
+if [[ -n $(git status -s) ]]; then 
   git config --global user.email "${EMAIL_ADDRESS}"
   git config --global user.name "${EMAIL_ADDRESS}"
 
