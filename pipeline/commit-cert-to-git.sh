@@ -7,8 +7,8 @@ CERT_OUTPUT_DIR=letsencrypt
 git clone cert-repo cert-repo-modified
 
 # Copy all the generated certs into the repo ()
-mkdir -p cert-repo-modified/proxy-certs
-cp -R --dereference ${CERT_OUTPUT_DIR}/live/* cert-repo-modified/proxy-certs
+#mkdir -p cert-repo-modified/letsencrypt
+cp -R ${CERT_OUTPUT_DIR} cert-repo-modified
 
 cd cert-repo-modified
 

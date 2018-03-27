@@ -3,6 +3,7 @@
 set -eux
 
 CERT_OUTPUT_DIR=letsencrypt
+CERT_WORK_DIR=letsencrypt_work
 
 mkdir -p ${CERT_OUTPUT_DIR}/live
 mkdir -p ${CERT_OUTPUT_DIR}/renewal
@@ -15,12 +16,14 @@ chain = ${CERT_OUTPUT_DIR}/live/den.ecsteam.io/chain.pem
 fullchain = ${CERT_OUTPUT_DIR}/live/den.ecsteam.io/fullchain.pem
 EOL
 
+ls -alR ${CERT_OUTPUT_DIR}
 
+echo "XXXXXXXXXXXXXXXXXXXXX"
 
 certbot certonly \
      --config-dir "${CERT_OUTPUT_DIR}" \
-     --work-dir "${CERT_OUTPUT_DIR}" \
-     --logs-dir "${CERT_OUTPUT_DIR}" \
+     --work-dir "${CERT_WORK_DIR}" \
+     --logs-dir "${CERT_WORK_DIR}" \
      --non-interactive \
      --agree-tos \
      --manual-public-ip-logging-ok \
