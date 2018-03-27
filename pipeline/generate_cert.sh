@@ -5,16 +5,7 @@ set -eux
 CERT_OUTPUT_DIR=letsencrypt
 CERT_WORK_DIR=letsencrypt_work
 
-mkdir -p ${CERT_OUTPUT_DIR}/live
-mkdir -p ${CERT_OUTPUT_DIR}/renewal
-cp -R cert-repo/proxy-certs/* ${CERT_OUTPUT_DIR}/live
-
-cat >${CERT_OUTPUT_DIR}/renewal/den.ecsteam.io.conf <<EOL
-cert = ${CERT_OUTPUT_DIR}/live/den.ecsteam.io/cert.pem
-privkey = ${CERT_OUTPUT_DIR}/live/den.ecsteam.io/privkey.pem
-chain = ${CERT_OUTPUT_DIR}/live/den.ecsteam.io/chain.pem
-fullchain = ${CERT_OUTPUT_DIR}/live/den.ecsteam.io/fullchain.pem
-EOL
+cp -R cert-repo/${CERT_OUTPUT_DIR} .
 
 ls -alR ${CERT_OUTPUT_DIR}
 
